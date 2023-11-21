@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <h1 class="subtitle text-center">記事の編集</h1>
+    <div class="offset-3 col-6">
+        <form action="/articles/<%= article._id %>?_method=PUT" method="POST" novalidate class="validated-form">
+            <div class="mb-3">
+                <label class="form-label" for="title">タイトル</label>
+                <input class="form-control" type="text" name="article[title]" id="title" value="<%= article.title %>" required>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="text">本文</label>
+                <textarea class="form-control" type="text" name="article[text]" id="text" required><%= article.text %></textarea>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">更新する</button>
+            </div>
+        </form>
+        <% if(profileRedirectUrl){ %>
+        <a href="<%= profileRedirectUrl %>">プロフィールに戻る</a>
+        <% } else { %>
+        <a href="/articles">一覧へ戻る</a>
+        <% } %>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="my-3 form-label" class="subtitle">▼<%= usr.username %>のプロフィール</h1>
+<h3 class="mb-3 form-label">自己紹介</h3>
+<div class="card py-auto mb-3">
+    <div class="card-body">
+        <p id="introduction"><%= usr.introduction %></p>
+        <% if(currentUser && usr.equals(currentUser._id)) { %>
+        <a class="btn btn-primary" href="/updateIntroduction/<%= usr._id %>">編集</a>
+        <% } %>
+    </div>
+</div>
+
+<h3 class="mb-3 form-label">投稿一覧</h3>
+<% for (let article of articles){ %>
+    <div class="card mb-3">
+        <div class="col-md-12">
+            <div class="card-body">
+                <h5 class="card-title d-inline me-3"><%= article.title %></h5>
+                <% if(article.text.length > 250){ %>	<!-- 250文字を超える場合はそれ以降を省略 -->
+                <% article.text = article.text.replace(/\r\n/g, '<br>'); %>
+                <p class="card-text"><%- article.text.substring(0, 250) %>   ...</p>
+                <% } else{ %>	<!-- それ以外は全部表示 -->
+                <p class="card-text"><%= article.text %></p>
+                <% } %>
+                <a class="btn btn-primary" href="/articles/<%= article._id %>">詳細</a>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<% if(currentUser && usr.equals(currentUser._id)) { %>
+    <h3 class="mb-3 form-label">お気に入り記事一覧</h3>
+
+    <% for (let favoriteArticle of favoriteArticles){ %>
+        <div class="card mb-3">
+            <div class="col-md-12">
+                <div class="card-body">
+                    <h5 class="card-title d-inline me-3"><%= favoriteArticle.title %></h5>
+                    <% if(favoriteArticle.text.length > 250){ %>	<!-- 250文字を超える場合はそれ以降を省略 -->
+                    <% favoriteArticle.text = favoriteArticle.text.replace(/\r\n/g, '<br>'); %>
+                    <p class="card-text"><%- favoriteArticle.text.substring(0, 250) %>   ...</p>
+                    <% } else{ %>	<!-- それ以外は全部表示 -->
+                    <p class="card-text"><%= favoriteArticle.text %></p>
+                    <% } %>
+                    <a class="btn btn-primary" href="/articles/<%= favoriteArticle._id %>">詳細</a>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% } %>

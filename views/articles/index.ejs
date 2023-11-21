@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="subtitle">就活役立ち記事一覧</h1>
+<div>
+	<a href="/articles/new">新規投稿</a>
+</div>
+
+<% for(let article of articles){ %>
+<div class="card mb-3">
+	<div class="col-md-12">
+		<div class="card-body">
+			<h5 class="card-title d-inline me-3"><%= article.title %></h5>
+			<p class="d-inline">投稿者：<a href="/profile/<%= article.author._id %>"><%= article.author.username %></a></p>
+			<% if(article.text.length > 250){ %>	<!-- 250文字を超える場合はそれ以降を省略 -->
+			<% article.text = article.text.replace(/\r\n/g, '<br>'); %>
+			<p class="card-text textBr"><%- article.text.substring(0, 250) %>   ...</p>
+			<% } else{ %>	<!-- それ以外は全部表示 -->
+			<p class="card-text"><%= article.text %></p>
+			<% } %>
+			<a class="btn btn-primary" href="/articles/<%= article._id %>">詳細</a>
+		</div>
+	</div>
+</div>
+<% } %>

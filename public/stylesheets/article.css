@@ -1,0 +1,3 @@
+.textBr {   /*記事本文の改行を適切に表示*/
+    white-space: pre-line;
+}

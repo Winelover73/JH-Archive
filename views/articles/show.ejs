@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+<div class="card offset-3 col-6 p-3">
+    <card-body >
+        <h3 class="card-title"><%= article.title %></h3>
+        <li class="list-group-item">投稿者：<%= article.author.username %></li>
+        <% article.text = article.text.replace(/\r\n/g, '<br>'); %>
+        <p class="card-text textBr"><%- article.text %></p>
+        <% if(currentUser && article.author.equals(currentUser._id)) { %>
+        <a class="card-link btn btn-info" href="/articles/<%= article._id %>/edit">編集する</a>
+        <form class="card-link d-inline" action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">削除する</button>
+        </form>
+        <% } %>
+        <% if(profileRedirectUrl){ %>
+        <a class="card-link" href="<%= profileRedirectUrl %>">プロフィールに戻る</a>
+        <% } else { %>
+        <a class="card-link" href="/articles">一覧へ戻る</a>
+        <% } %>
+        <% if(!(currentUser && article.author.equals(currentUser._id)) && (!checkFav)) { %>
+        <a class="card-link" href="/favoriteArticle/<%= article._id %>">お気に入り登録</a>
+        <% } %>
+
+    </card-body>
+</div>

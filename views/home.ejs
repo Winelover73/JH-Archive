@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JH-Archive</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link href="/stylesheets/home.css" rel="stylesheet" type="text/css">
+    
+
+<body class="d-flex text-center text-white bg-dark">
+    <div class="d-flex cover-containar w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0 title">JH-Archive</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a href="/" class="nav-link active">Home</a>
+                    <a href="/aboutus" class="nav-link">About us</a>
+                    <a href="/articles" class="nav-link">Article</a>
+                    <% if(!currentUser) { %>
+                    <a class="nav-link" href="/articles/new">Create</a>
+                    <% } %>
+                    <% if(!currentUser) { %>
+                    <a href="/login" class="nav-link">Login</a>
+                    <a href="/register" class="nav-link">Sign up</a>
+                    <% } else { %>
+                        <a class="nav-link" href="/profile">Profile</a>
+                    <a href="/logout" class="nav-link">Logout</a>
+                    <% } %>
+                </nav>
+            </div>
+        </header>
+        <main class="px-3">
+            <h1 class="topic">The future depends on what you do today.</h1>
+            <% if(!currentUser){ %>
+            <p class="lead font-weight-bold">
+            <br> 桑門ゼミ専用,就活生による就活制のための掲示板です。
+            <br>ぜひ皆さんご自身の行動、経験、後悔を書き込んで欲しいです！
+            <br>また、この掲示板を見て少しでも就活生の皆さんの力になれば幸いです！
+            <br>初めての方は<u>Sing up</u>,　二度目以降の方は<u>Log in</u>を押してください。
+            <% } else { %>
+                <p>やっほーい！</p>
+            <% } %>
+        </p>
+            <% if(!currentUser){ %>
+            <a href="/register" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Sing up</a>
+            <a href="/login" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Log in</a>
+            <% } %>
+        </main>
+
+        <%- include('partials/footer') %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
